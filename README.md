@@ -11,7 +11,7 @@ A Chrome extension to filter raw log files (or text files) directly in the brows
     -   **OR Logic**: Matches entries containing *at least one* of the positive keywords.
     -   **Exclusion**: Prefix a keyword with `!` to exclude it (e.g., `!debug`).
     -   **Search Scope**: Searches the entire log entry (header + details/stack trace).
--   **Preserves Context**: Displays the full multi-line entry if a match is found.
+-   **Preserves Context**: Displays the full multi-line entry if a match is found
 
 ## Usage
 
