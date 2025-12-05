@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extension Popup</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Log Filter</h1>
+      <p>Filter logs by thread ID and keywords</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Filters</h2>
+        <div class="form-group">
+          <label for="threadNumber">Thread ID</label>
+          <input type="text" id="threadNumber" placeholder="e.g. [Thread-12]">
+        </div>
+        <div class="form-group">
+          <label for="keywords">Keywords (Optional)</label>
+          <textarea id="keywords" rows="3" placeholder="error, warn, !database"></textarea>
+        </div>
+        <button id="applyBtn" class="btn primary">Apply</button>
+      </div>
+
+      <div id="status" class="status-message"></div>
+    </main>
+
+    <footer>
+      <p>Evoke</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
