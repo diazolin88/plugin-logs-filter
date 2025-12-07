@@ -1,10 +1,11 @@
 :root {
-  --primary-color: #4f46e5;
-  --primary-hover: #4338ca;
-  --bg-color: #f9fafb;
-  --text-color: #1f2937;
-  --card-bg: #ffffff;
-  --border-color: #e5e7eb;
+  --primary-color: #33ff00;
+  --primary-dim: #22aa00;
+  --bg-color: #0a0a0a;
+  --card-bg: #000000;
+  --text-color: #33ff00;
+  --border-color: #33ff00;
+  --error-color: #ff0000;
 }
 
 * {
@@ -14,79 +15,89 @@
 }
 
 body {
-  width: 320px;
-  font-family: 'Inter', sans-serif;
+  width: 350px;
+  font-family: 'Courier New', Courier, monospace;
   background-color: var(--bg-color);
   color: var(--text-color);
-  line-height: 1.5;
+  line-height: 1.4;
+  padding: 10px;
+  border: 1px solid var(--primary-dim);
 }
 
 .container {
-  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+header {
+  border-bottom: 2px dashed var(--primary-dim);
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
 header h1 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px var(--primary-dim);
 }
 
 header p {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 .card {
   background-color: var(--card-bg);
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  padding: 0; /* Minimal padding in terminal */
+  border: none;
 }
 
 h2 {
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #6b7280;
+  border-left: 5px solid var(--primary-color);
+  padding-left: 10px;
 }
 
 .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 label {
   display: block;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-input[type="number"],
+label::after {
+  content: ":";
+}
+
 input[type="text"],
 textarea {
   width: 100%;
   padding: 8px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--primary-dim);
+  border-radius: 0; /* No radius */
   font-family: inherit;
-  font-size: 0.875rem;
-  color: var(--text-color);
-  background-color: #fff;
-  transition: border-color 0.15s ease;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  background-color: #000;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.1);
 }
 
 input:focus,
 textarea:focus {
-  outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 8px var(--primary-dim);
+  background-color: #051a05;
 }
 
 textarea {
@@ -94,43 +105,66 @@ textarea {
 }
 
 .btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   width: 100%;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
+  padding: 10px;
+  border: 2px solid var(--primary-color);
+  background-color: black;
+  color: var(--primary-color);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
+  transition: all 0.1s steps(2);
 }
 
-.btn.primary {
+.btn:hover {
   background-color: var(--primary-color);
-  color: white;
+  color: black;
 }
 
-.btn.primary:hover {
-  background-color: var(--primary-hover);
-  transform: translateY(-1px);
-}
-
-.btn.primary:active {
-  transform: translateY(0);
+.btn:active {
+  transform: translateY(2px);
 }
 
 .status-message {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   text-align: center;
   min-height: 1.5em;
-  color: #059669;
+  margin-top: 10px;
+  color: var(--primary-color);
+}
+
+/* CRT Scanline effect (subtle) */
+body::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
 }
 
 footer {
   text-align: center;
-  font-size: 0.75rem;
-  color: #9ca3af;
-  margin-top: 8px;
+  font-size: 0.7rem;
+  color: var(--primary-dim);
+  margin-top: 20px;
+  border-top: 1px solid var(--primary-dim);
+  padding-top: 5px;
 }
