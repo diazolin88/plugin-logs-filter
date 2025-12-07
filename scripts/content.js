@@ -45,10 +45,10 @@ function parseLogEntries(text) {
 }
 
 // Filter function
-function filterContent(threadFilter, keywordFilter) {
+function filterContent(lineFilter, keywordFilter) {
     if (!originalContent) init();
 
-    if (!threadFilter && !keywordFilter) {
+    if (!lineFilter && !keywordFilter) {
         // Restore original if filters are empty
         containerElement.innerText = originalContent;
         return;
@@ -59,7 +59,7 @@ function filterContent(threadFilter, keywordFilter) {
 
     // Filter entries
     const filteredEntries = logEntries.filter(entry => {
-        const matchesThread = !threadFilter || entry.line.includes(threadFilter);
+        const matchesLine = !lineFilter || entry.line.includes(lineFilter);
 
         let matchesKeyword = true;
         if (keywordFilter?.trim()) {
@@ -88,7 +88,7 @@ function filterContent(threadFilter, keywordFilter) {
             matchesKeyword = posOK && negOK;
         }
 
-        return matchesThread && matchesKeyword;
+        return matchesLine && matchesKeyword;
     });
 
     // Join the full text of matching entries
@@ -99,9 +99,9 @@ function filterContent(threadFilter, keywordFilter) {
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "filterLogs") {
-        const { threadNumber, keywords } = message.data;
-        console.log('Log Viewer: Received filter request:', { threadNumber, keywords });
-        filterContent(threadNumber, keywords);
+        const { lineText, keywords } = message.data;
+        console.log('Log Viewer: Received filter request:', { lineText, keywords });
+        filterContent(lineText, keywords);
         sendResponse({ status: "filtered", count: 0 });
     }
     return true;
